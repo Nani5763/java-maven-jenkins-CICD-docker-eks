@@ -108,28 +108,28 @@ resource "aws_iam_instance_profile" "worker" {
 #Data Sources for VPC, Subnets, and Security Group
 data "aws_vpc" "main" {
   tags = {
-    Name = "py_vpc"
+    Name = "java_vpc"
   }
 }
 data "aws_subnet" "subnet-1" {
   vpc_id = data.aws_vpc.main.id
   filter {
     name = "tag:Name"
-    values = [ "py-pub-sub-1" ]
+    values = [ "java-pub-sub-1" ]
   }
 }
 data "aws_subnet" "subnet-2" {
   vpc_id = data.aws_vpc.main.id
   filter {
     name = "tag:Name"
-    values = [ "py-pub-sub-2" ]
+    values = [ "java-pub-sub-2" ]
   }
 }
 data "aws_security_group" "selected" {
   vpc_id = data.aws_vpc.main.id
   filter {
     name = "tag:Name"
-    values = ["py-sg"]
+    values = ["java-sg"]
   }
 }
 #Create EKS Cluster
